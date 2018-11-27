@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     cp: DataTypes.INTEGER
   }, {});
-  Pokemon.associate = function(models) {
+  Pokemon.associate = function (models) {
     // associations can be defined here
   };
   return Pokemon;
