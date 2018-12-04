@@ -67,10 +67,15 @@ pokemons.put('/:id', (req, res) => {
       return res.status(400).send('Nincs ilyen pokemon, igy nem tudsz rajta valtoztatni!');
     } else {
       models.Pokemon.update(req.body, { where: { id: req.params.id } }).then(result => {
-        res.json(result);
+        res.redirect(`/pokemons/${req.params.id}`);
       });
     }
   });
 });
+
+/* update2
+pokemons.put('/:id', (req, res) => {
+  res.redirect(`/pokemons/${req.params.id}`);
+}); */
 
 module.exports = pokemons;

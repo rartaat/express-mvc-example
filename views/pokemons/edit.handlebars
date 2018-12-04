@@ -1,5 +1,5 @@
 <h2>Edit</h2>
-<form method="POST" action="/pokemons/{{pokemon.id}}">
+<form method="POST" action="/pokemons/{{pokemon.id}}?_method=PUT">
  <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" name="name" value="{{pokemon.name}}" />
@@ -12,5 +12,5 @@
     <label for="cp">Combat Point</label>
     <input type="text" class="form-control" name="cp" value="{{pokemon.cp}}" />
   </div>
-   <td><a href="/pokemons/" class="btn btn-secondary">Back</a></td>
+  <input type="submit" value="Frissités"/>
 </form>
