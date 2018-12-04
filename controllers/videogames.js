@@ -8,7 +8,8 @@ videogames.use(bodyParser.urlencoded({ extended: false }));
 // index
 videogames.get('/', (req, res) => {
   models.Videogame.findAll().then(videogames => {
-    res.json(videogames);
+    res.locals.videogames = videogames;
+    res.render('videogames/index.handlebars');
   });
 });
 
@@ -18,18 +19,28 @@ videogames.get('/:id', (req, res) => {
     if (!videogame) {
       return res.status(400).send('No-no, nem lenni Game!');
     }
-    res.json(videogame);
+    res.locals.videogame = videogame;
+    res.render('videogames/show.handlebars');
+  });
+});
+
+// edit
+videogames.get('/:id/edit', (req, res) => {
+  models.Videogame.findById(req.params.id).then(videogame => {
+    res.locals.videogame = videogame;
+    res.render('videogames/edit.handlebars'); // egy mappa név és egy fáljnév
   });
 });
 
 // create
-videogames.post('/', (req, res) => {
+videogames.post('/:id/create', (req, res) => {
   models.Videogame.findOne({ where: { id: req.body.id } }).then(result => {
     if (result) {
       return res.status(400).send('Mar letezik ilyen GAME, agyááá mög másikat!');
     } else {
       models.Videogame.create(req.body).then(record => {
-        res.json(record);
+        res.locals.record = record;
+        res.render('videogames/create.handlebars');
       });
     }
   });

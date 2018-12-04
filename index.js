@@ -3,6 +3,10 @@ const app = express();
 const clocks = require('./controllers/clocks');
 const videogames = require('./controllers/videogames');
 const pokemons = require('./controllers/pokemons');
+const exphbs = require('express-handlebars');
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 app.use('/clocks', clocks);
 app.use('/videogames', videogames);

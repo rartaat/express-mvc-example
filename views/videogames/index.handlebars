@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <tbody>
+    {{#each videogames}}
+    <tr>
+      <td>{{id}}</td>
+      <td>{{distributer}}</td>
+      <td>{{name}}</td>
+      <td>{{type}}</td>
+      <td><a href="/videogames/{{id}}" class="btn btn-primary">Show</a></td>
+      <td><a href="/videogames/{{id}}/edit" class="btn btn-secondary">Edit</a></td>
+      <td><a href="/videogames/{{id}}?_method=DELETE" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<tr>
+  <td>{{id}}</td>
+  <td>{{distributer}}</td>
+  <td>{{name}}</td>
+  <td>{{type}}</td>
+  <td><a href="/videogames/{{id}}/create" class="btn btn-primary">Add New</a></td>
+</tr>

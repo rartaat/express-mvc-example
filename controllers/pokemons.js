@@ -8,7 +8,8 @@ pokemons.use(bodyParser.urlencoded({ extended: false }));
 // index
 pokemons.get('/', (req, res) => {
   models.Pokemon.findAll().then(pokemons => {
-    res.json(pokemons);
+    res.locals.pokemons = pokemons;
+    res.render('pokemons/index.handlebars');
   });
 });
 
@@ -18,7 +19,16 @@ pokemons.get('/:id', (req, res) => {
     if (!pokemon) {
       return res.status(400).send('Nincs ilyen pokemon!');
     }
-    res.json(pokemon);
+    res.locals.pokemon = pokemon;
+    res.render('pokemons/show.handlebars');
+  });
+});
+
+// edit
+pokemons.get('/:id/edit', (req, res) => {
+  models.Pokemon.findById(req.params.id).then(pokemon => {
+    res.locals.pokemon = pokemon;
+    res.render('pokemons/edit.handlebars'); // egy mappa név és egy fáljnév
   });
 });
 

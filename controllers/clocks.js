@@ -8,7 +8,8 @@ clocks.use(bodyParser.urlencoded({ extended: false }));
 // index
 clocks.get('/', (req, res) => {
   models.Clock.findAll().then(clocks => {
-    res.json(clocks);
+    res.locals.clocks = clocks;
+    res.render('clocks/index.handlebars');
   });
 });
 
@@ -18,7 +19,16 @@ clocks.get('/:id', (req, res) => {
     if (!clock) {
       return res.status(400).send('Nem talalhato ilyen ID!');
     }
-    res.json(clock);
+    res.locals.clock = clock;
+    res.render('clocks/show.handlebars'); // egy mappa név és egy fáljnév
+  });
+});
+
+// edit
+clocks.get('/:id/edit', (req, res) => {
+  models.Clock.findById(req.params.id).then(clock => {
+    res.locals.clock = clock;
+    res.render('clocks/edit.handlebars'); // egy mappa név és egy fáljnév
   });
 });
 

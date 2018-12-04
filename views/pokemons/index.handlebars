@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <tbody>
+    {{#each pokemons}}
+    <tr>
+      <td>{{id}}</td>
+      <td>{{name}}</td>
+      <td>{{type}}</td>
+      <td>{{cp}}</td>
+      <td><a href="/pokemons/{{id}}" class="btn btn-primary">Show</a></td>
+      <td><a href="/pokemons/{{id}}/edit" class="btn btn-secondary">Edit</a></td>
+      <td><a href="/pokemons/{{id}}?_method=DELETE" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<td><a href="/pokemons/{{id}}" class="btn btn-primary">Add New</a></td>
