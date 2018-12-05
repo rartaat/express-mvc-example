@@ -38,8 +38,9 @@ pokemons.post('/', (req, res) => {
     if (result) {
       return res.status(400).send('Mar letezik ilyen pokemonka, agyááá mög másikat!');
     } else {
-      models.Pokemon.create(req.body).then(record => {
-        res.json(record);
+      models.Pokemon.create(req.body).then(pokemon => {
+        res.locals.pokemon = pokemon;
+        res.render('pokemons/show.handlebars');
       });
     }
   });
@@ -51,7 +52,7 @@ pokemons.delete('/:id', (req, res) => {
     if (!result) {
       return res.status(400).send('Nem lehet torolni, mert nem letezik!');
     }
-    res.json(result);
+    res.redirect(`/pokemons`);
   });
 });
 
@@ -72,10 +73,5 @@ pokemons.put('/:id', (req, res) => {
     }
   });
 });
-
-/* update2
-pokemons.put('/:id', (req, res) => {
-  res.redirect(`/pokemons/${req.params.id}`);
-}); */
 
 module.exports = pokemons;
